@@ -91,6 +91,13 @@ int main(string[] args) {
 
 	if (!("version" in dict)) {
 		errorMessage("nfy-get requires a version to install!");
+		version(Windows) {
+			File error = File("error.txt", "w");
+			error.write("Nfy-get's syntax is: nfy-get version=NFY_VERSION OPTS...\nyou need to run NFy-get through the command line, preferrably through Windows Terminal.\nWhat you need to do, is open Windows Terminal/Any terminal emulator, go to the directory NFy-get is in.\nThen you run nfy-get using\n.\\nfy-get.exe | .\\nfy-get version=NFy (or your choice of version");
+			error.close();
+			system("notepad.exe error.txt");
+			remove("error.txt");
+		}
 		return 1;
 	}
 	logMessage("Gathering NFy...");
